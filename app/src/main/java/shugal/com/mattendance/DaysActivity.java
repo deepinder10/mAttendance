@@ -27,6 +27,7 @@ public class DaysActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(0);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);

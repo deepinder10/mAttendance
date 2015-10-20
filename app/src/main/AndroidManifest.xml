@@ -31,6 +31,8 @@
 
         </activity>
 
+        <activity android:name=".NewLecture" />
+
         <activity android:name=".Greetings" />
     </application>
 

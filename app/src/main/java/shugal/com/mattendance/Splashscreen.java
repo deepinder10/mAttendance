@@ -16,8 +16,8 @@ public class Splashscreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreen);
-            //createTablesAndDatabases();
-            startSplashscreen();
+        //createTablesAndDatabases();
+        startSplashscreen();
     }
 
     private boolean isFirstTime() {

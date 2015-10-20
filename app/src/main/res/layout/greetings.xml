@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-        <TextView
-            android:text="Hey There !!"
-            android:padding="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@android:style/TextAppearance.DeviceDefault.Large" />
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
         <TextView
-            android:text="This application lets you keep track of your attendance so that you can know if your subject wise attendance is above 75% or not\nThis is your personal attendance marker."
-            android:padding="16dp"
+            style="@android:style/TextAppearance.DeviceDefault.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@android:style/TextAppearance.DeviceDefault.Large"/>
+            android:padding="16dp"
+            android:text="Hey There !!" />
 
         <TextView
-            android:text=" Let's start by adding some subjects, shall we ?"
-            android:padding="16dp"
+            style="@android:style/TextAppearance.DeviceDefault.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@android:style/TextAppearance.DeviceDefault.Large" />
+            android:padding="16dp"
+            android:text="This application lets you keep track of your attendance so that you can know if your subject wise attendance is above 75% or not\nThis is your personal attendance marker." />
+
+        <TextView
+            style="@android:style/TextAppearance.DeviceDefault.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text=" Let's start by adding some subjects, shall we ?" />
 
     </LinearLayout>
 
 
     <Button
         android:id="@+id/proceedButton"
-        android:text="Proceed -->"
-        android:onClick="proceedClick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:background="#ffff6a58"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="#ffff6a58"
+        android:onClick="proceedClick"
+        android:text="Proceed -->"
+        android:textColor="#ffffff" />
 
 
 </RelativeLayout>

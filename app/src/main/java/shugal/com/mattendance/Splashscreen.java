@@ -10,20 +10,14 @@ import android.os.Handler;
  */
 public class Splashscreen extends Activity {
 
-    int SCREEN_TIMEOUT = 3000;
+    int SCREEN_TIMEOUT = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreen);
-
-        if (isFirstTime()) {
             //createTablesAndDatabases();
             startSplashscreen();
-        } else {
-            startSplashscreen();
-        }
-
     }
 
     private boolean isFirstTime() {
@@ -43,8 +37,15 @@ public class Splashscreen extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent proceedToMain = new Intent(Splashscreen.this, MainActivity.class);
-                startActivity(proceedToMain);
+
+                if (isFirstTime()) {
+                    Intent firstInputs = new Intent(Splashscreen.this, Greetings.class);
+                    startActivity(firstInputs);
+                } else {
+                    Intent proceedToMain = new Intent(Splashscreen.this, MainActivity.class);
+                    startActivity(proceedToMain);
+                }
+
                 finish();
             }
         }, SCREEN_TIMEOUT);

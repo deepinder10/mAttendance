@@ -29,6 +29,8 @@
             android:name=".DaysActivity" >
 
         </activity>
+
+        <activity android:name=".Greetings" />
     </application>
 
 </manifest>

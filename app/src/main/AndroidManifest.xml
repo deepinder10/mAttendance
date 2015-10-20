@@ -15,10 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DaysActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="shugal.com.mattendance.MainActivity" />
+        <activity
+            android:name=".DaysActivity" >
+
         </activity>
     </application>
 

@@ -73,7 +73,7 @@ public class DaysActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(DaysActivity.this, MainActivity.class));
 
         } else if (id == R.id.todayAttendance) {
-            
+
         } else if (id == R.id.dangerZone) {
 
         }

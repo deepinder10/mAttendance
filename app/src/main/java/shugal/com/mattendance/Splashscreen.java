@@ -16,8 +16,7 @@ public class Splashscreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreen);
-            //createTablesAndDatabases();
-            startSplashscreen();
+        startSplashscreen();
     }
 
     private boolean isFirstTime() {
@@ -39,6 +38,7 @@ public class Splashscreen extends Activity {
             public void run() {
 
                 if (isFirstTime()) {
+                    createTablesAndDatabases();
                     Intent firstInputs = new Intent(Splashscreen.this, Greetings.class);
                     startActivity(firstInputs);
                 } else {
@@ -49,6 +49,19 @@ public class Splashscreen extends Activity {
                 finish();
             }
         }, SCREEN_TIMEOUT);
+    }
+
+    private void createTablesAndDatabases() {
+        DatabaseHelper db = new DatabaseHelper(this);
+
+
+        LectureData d1 = new LectureData("Test", 0, 0);
+        db.addLecture(d1);
+
+        db.deleteFirstLecture();
+
+
+        db.close();
     }
 
 }

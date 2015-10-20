@@ -26,9 +26,12 @@
         </activity>
 
         <activity
-            android:name=".DaysActivity" >
+            android:name=".DaysActivity"
+            android:parentActivityName=".MainActivity">
 
         </activity>
+
+        <activity android:name=".NewLecture" />
 
         <activity android:name=".Greetings" />
     </application>

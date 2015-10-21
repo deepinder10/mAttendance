@@ -12,6 +12,7 @@ public class NewLecture extends Activity {
 
     private TextInputLayout layoutLectureNo, layoutLectureName;
     private EditText lectureNo, lectureName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

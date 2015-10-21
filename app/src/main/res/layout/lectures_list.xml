@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:paddingTop="20dp"
-    android:paddingRight="20dp"
-    android:paddingLeft="20dp"
-    android:paddingBottom="20dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/lectureName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textStyle="italic"
+            android:text="Lecture Name"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Lecture Name" />
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/lecturePercent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textStyle="italic"
+            android:text="Percentage: "
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Percentage: " />
+            android:textStyle="italic" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/lecturePresents"
-            android:hint="Presents: "
-            android:layout_weight="1"
-            android:textStyle="italic"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Presents: "
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/lectureAbsents"
-            android:hint="Absents: "
-            android:textStyle="italic"
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="Absents: "
+            android:textStyle="italic" />
     </LinearLayout>
 
 

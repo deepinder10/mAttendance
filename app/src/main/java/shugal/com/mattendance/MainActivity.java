@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements
             emptyLinearLayout.setVisibility(View.VISIBLE);
             TextView emptyText = (TextView) findViewById(R.id.emptyListText);
             Typeface
-                    tf= Typeface.createFromAsset(getAssets(), "fonts/empty_list.ttf");
+                    tf = Typeface.createFromAsset(getAssets(), "fonts/empty_list.ttf");
             emptyText.setTypeface(tf);
 
         } else {

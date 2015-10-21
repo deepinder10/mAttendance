@@ -60,6 +60,7 @@ public class Splashscreen extends Activity {
 
         db.deleteFirstLecture();
 
+
         db.close();
     }
 

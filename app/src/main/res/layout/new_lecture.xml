@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="20dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:paddingTop="20dp">
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_lecture_name"
@@ -17,9 +18,9 @@
             android:id="@+id/lecture_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Lecture name"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:hint="Lecture name" />
     </android.support.design.widget.TextInputLayout>
 
 
-</LinearLayout>
+</LinearLayout >

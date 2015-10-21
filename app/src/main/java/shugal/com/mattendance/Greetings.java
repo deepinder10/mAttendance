@@ -1,11 +1,9 @@
 package shugal.com.mattendance;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import com.github.paolorotolo.appintro.AppIntro;
-import com.github.paolorotolo.appintro.AppIntroFragment;
 
 /**
  * Created by abhishek on 20/10/15.
@@ -13,15 +11,12 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 public class Greetings extends AppIntro {
     @Override
     public void init(Bundle savedInstanceState) {
-        addSlide(AppIntroFragment.newInstance("Attendance Tracker",
-                "This App will help you track your attendance", R.drawable.playstore_icon, Color.LTGRAY));
 
-        addSlide(AppIntroFragment.newInstance("Attendance Tracker",
-                "This App will help you track your attendance", R.drawable.playstore_icon, Color.LTGRAY));
+        addSlide(SampleSlide.newInstance(R.layout.intro1));
 
-        addSlide(AppIntroFragment.newInstance("Attendance Tracker",
-                "This App will help you track your attendance", R.drawable.playstore_icon, Color.LTGRAY));
+        addSlide(SampleSlide.newInstance(R.layout.intro2));
 
+        addSlide(SampleSlide.newInstance(R.layout.intro3));
 
         showSkipButton(true);
         showDoneButton(true);

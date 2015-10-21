@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -106,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements
 
         final AlertDialog.Builder customEventDialog = new AlertDialog.Builder(context);
 
-        TextInputLayout inputLectureName = (TextInputLayout) dialogView.findViewById(R.id.input_layout_lecture_name);
         final EditText lecturename = (EditText) dialogView.findViewById(R.id.lecture_name);
         //amountText.setText("0");
 
@@ -155,8 +153,8 @@ public class MainActivity extends AppCompatActivity implements
             lectureList.setVisibility(View.GONE);
             emptyLinearLayout.setVisibility(View.VISIBLE);
             TextView emptyText = (TextView) findViewById(R.id.emptyListText);
-            Typeface
-                    tf = Typeface.createFromAsset(getAssets(), "fonts/empty_list.ttf");
+            Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/empty_list.ttf");
+
             emptyText.setTypeface(tf);
 
         } else {

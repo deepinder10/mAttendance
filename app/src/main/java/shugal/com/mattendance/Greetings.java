@@ -3,6 +3,7 @@ package shugal.com.mattendance;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntro2;
 
 /**
@@ -17,7 +18,6 @@ public class Greetings extends AppIntro2 {
         addSlide(SampleSlide.newInstance(R.layout.intro2));
 
         addSlide(SampleSlide.newInstance(R.layout.intro3));
-
         showDoneButton(true);
 
     }

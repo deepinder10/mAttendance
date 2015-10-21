@@ -21,19 +21,25 @@
         </activity>
 
         <activity
-            android:name=".MainActivity" >
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" >>
 
         </activity>
 
         <activity
             android:name=".DaysActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity">
 
         </activity>
 
-        <activity android:name=".NewLecture" />
+        <activity
+            android:name=".NewLecture"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".Greetings" />
+        <activity
+            android:name=".Greetings"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

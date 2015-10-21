@@ -1,23 +1,41 @@
 package shugal.com.mattendance;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
+
+import com.github.paolorotolo.appintro.AppIntro;
+import com.github.paolorotolo.appintro.AppIntroFragment;
 
 /**
  * Created by abhishek on 20/10/15.
  */
-public class Greetings extends Activity {
-
+public class Greetings extends AppIntro {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.greetings);
+    public void init(Bundle savedInstanceState) {
+        addSlide(AppIntroFragment.newInstance("Attendance Tracker",
+                "This App will help you track your attendance", R.drawable.playstore_icon, Color.LTGRAY));
+
+        addSlide(AppIntroFragment.newInstance("Attendance Tracker",
+                "This App will help you track your attendance", R.drawable.playstore_icon, Color.LTGRAY));
+
+        addSlide(AppIntroFragment.newInstance("Attendance Tracker",
+                "This App will help you track your attendance", R.drawable.playstore_icon, Color.LTGRAY));
+
+
+        showSkipButton(true);
+        showDoneButton(true);
 
     }
 
-    public void proceedClick(View view) {
+    @Override
+    public void onSkipPressed() {
+        Intent proceedToMain = new Intent(Greetings.this, MainActivity.class);
+        startActivity(proceedToMain);
+    }
+
+    @Override
+    public void onDonePressed() {
         Intent proceedToMain = new Intent(Greetings.this, MainActivity.class);
         startActivity(proceedToMain);
     }

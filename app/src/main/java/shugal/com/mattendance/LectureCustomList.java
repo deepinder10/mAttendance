@@ -39,13 +39,13 @@ public class LectureCustomList extends ArrayAdapter<LectureData> {
         if (total == 0) {
             percent = 0;
         } else {
-            percent = (data.get_presents() / total) * 100;
+            percent = (data.get_presents()/total) * 100;
         }
 
         lectureName.setText(data.get_lecture_name());
-        lectureAbsents.setText("Absents: " + data.get_absents());
+        lectureAbsents.setText("Absents: "+data.get_absents());
         lecturePresents.setText("Presents: " + data.get_presents());
-        lecturePercent.setText(percent + " %");
+        lecturePercent.setText(percent+" %");
 
         return convertView;
 

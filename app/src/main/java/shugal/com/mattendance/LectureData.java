@@ -25,10 +25,6 @@ public class LectureData {
         return this.lecture_name;
     }
 
-    public void set_lecture_name(String name) {
-        this.lecture_name = name;
-    }
-
     public float get_presents() {
         return this.presents;
     }
@@ -37,13 +33,14 @@ public class LectureData {
         return this.absents;
     }
 
-    public int get_id() {
-        return this.id;
-    }
-
     public void set_id(int id) {
         this.id = id;
     }
+
+    public int get_id() { return this.id; }
+
+
+    public void set_lecture_name(String name) { this.lecture_name = name; }
 
     public void set_absent(float _absent) {
         this.absents = _absent;

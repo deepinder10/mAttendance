@@ -38,6 +38,10 @@
 
 
 
+        <TextView
+            android:text="Select day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <Spinner
             android:hint="Write Date"
             android:id="@+id/weekday"
@@ -45,6 +49,11 @@
             android:layout_marginBottom="10dp"
             android:layout_height="match_parent" />
 
+
+        <TextView
+            android:text="Select lecture name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <Spinner
             android:hint="Write Date"
             android:id="@+id/lectureName"

@@ -26,5 +26,6 @@ public class Greetings extends AppIntro2 {
     public void onDonePressed() {
         Intent proceedToMain = new Intent(Greetings.this, MainActivity.class);
         startActivity(proceedToMain);
+        finish();
     }
 }

@@ -20,7 +20,6 @@ public class DaysActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private String pageTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

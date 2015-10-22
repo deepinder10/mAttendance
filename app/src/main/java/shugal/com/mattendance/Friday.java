@@ -23,4 +23,6 @@ public class Friday extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_friday, container, false);
     }
+
+
 }

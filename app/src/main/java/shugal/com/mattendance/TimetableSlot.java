@@ -2,6 +2,7 @@ package shugal.com.mattendance;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
@@ -16,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,6 +25,8 @@ import java.util.ArrayList;
  */
 public class TimetableSlot extends AppCompatActivity {
     private String date="";
+    private TimetableData data = new TimetableData();
+
     private boolean isStartingTimeSelected = false;
     static final int TIME_DIALOG_ID = 0;
     private int pHour;
@@ -105,8 +107,10 @@ public class TimetableSlot extends AppCompatActivity {
         if (!validateEndingTime()) {
             return;
         }
-
-        Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
+        DatabaseHelper db = new DatabaseHelper(this);
+        db.addTimetableSlot(data);
+        db.close();
+        startActivity(new Intent(this, DaysActivity.class));
     }
 
     private void fillSpinners() {
@@ -124,7 +128,7 @@ public class TimetableSlot extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(), item, Toast.LENGTH_SHORT).show();
+                data.setDay(item);
             }
 
             @Override
@@ -143,7 +147,7 @@ public class TimetableSlot extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getApplicationContext(), item, Toast.LENGTH_SHORT).show();
+                data.setLecture_name(item);
             }
 
             @Override
@@ -250,8 +254,10 @@ public class TimetableSlot extends AppCompatActivity {
         if(select) {
             isStartingTimeSelected = false;
             lectureStartingTime.setText(date);
+            data.setStarting_time(date);
         } else {
             endingTime.setText(date);
+            data.setEnding_time(date);
         }
 
     }

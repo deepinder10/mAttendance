@@ -3,6 +3,7 @@ package shugal.com.mattendance;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -41,7 +42,18 @@ public class DaysActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DaysActivity.this, TimetableSlot.class));
+                DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+                if (db.isLectureListEmpty()) {
+                    Snackbar.make(view, "Please start by adding some lectures ", Snackbar.LENGTH_LONG)
+                            .setAction("Add Lectures", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                }
+                            }).show();
+                } else {
+                    startActivity(new Intent(DaysActivity.this, TimetableSlot.class));
+                }
             }
         });
 

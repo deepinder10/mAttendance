@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity implements
 
             startActivity(new Intent(MainActivity.this, DaysActivity.class));
 
-        } else if (id == R.id.myAttendance) {
-            startActivity(new Intent(MainActivity.this, MainActivity.class));
         } else if (id == R.id.todayAttendance) {
 
         } else if (id == R.id.dangerZone) {
@@ -168,4 +166,6 @@ public class MainActivity extends AppCompatActivity implements
 
         db.close();
     }
+
+
 }

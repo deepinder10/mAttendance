@@ -9,8 +9,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,7 +20,6 @@ public class DaysActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private String pageTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +41,7 @@ public class DaysActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Heya", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -85,7 +82,6 @@ public class DaysActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            pageTitle = mFragmentTitleList.get(position);
             return mFragmentTitleList.get(position);
         }
 

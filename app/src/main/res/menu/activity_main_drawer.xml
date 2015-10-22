@@ -8,9 +8,6 @@
                     android:id="@+id/showTimetable"
                     android:title="Show Timetable" />
                 <item
-                    android:id="@+id/myAttendance"
-                    android:title="My Attendance" />
-                <item
                     android:id="@+id/todayAttendance"
                     android:title="Today's Attendance" />
                 <item

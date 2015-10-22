@@ -83,18 +83,6 @@ public class DaysActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            pageTitle = mFragmentTitleList.get(position);
-            if (position == 0)
-                Toast.makeText(getApplicationContext(), "Monday", Toast.LENGTH_LONG).show();
-            if (position == 1)
-                Toast.makeText(getApplicationContext(), "Tuesday", Toast.LENGTH_LONG).show();
-            if (position == 2)
-                Toast.makeText(getApplicationContext(), "Wednesday", Toast.LENGTH_LONG).show();
-            if (position == 3)
-                Toast.makeText(getApplicationContext(), "Thursday", Toast.LENGTH_LONG).show();
-            if (position == 4)
-                Toast.makeText(getApplicationContext(), "Friday", Toast.LENGTH_LONG).show();
-
             return mFragmentTitleList.get(position);
         }
 

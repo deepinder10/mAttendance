@@ -42,7 +42,7 @@ public class DaysActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Heya", Toast.LENGTH_SHORT).show();
+
             }
         });
 

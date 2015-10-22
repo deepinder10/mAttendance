@@ -13,14 +13,6 @@
     android:layout_height="match_parent"
     tools:context=".TimetableSLot" >
 
-    <TextView
-        android:text="Enter New Timetable Entry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:textStyle="italic"
-        style="@style/Base.TextAppearance.AppCompat.Headline"
-        android:gravity="center" />
 
     <LinearLayout
         android:layout_width="match_parent"

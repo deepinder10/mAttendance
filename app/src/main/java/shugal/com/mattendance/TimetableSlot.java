@@ -24,7 +24,8 @@ import java.util.ArrayList;
  * Created by abhishek on 22/10/15.
  */
 public class TimetableSlot extends AppCompatActivity {
-    String date="";
+    private String date="";
+    private boolean isStartingTimeSelected = false;
     static final int TIME_DIALOG_ID = 0;
     private int pHour;
     private int pMinute;
@@ -65,6 +66,7 @@ public class TimetableSlot extends AppCompatActivity {
         lectureStartingTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isStartingTimeSelected = true;
                 showDialog(TIME_DIALOG_ID);
             }
         });
@@ -229,7 +231,7 @@ public class TimetableSlot extends AppCompatActivity {
                     pHour = hourOfDay;
                     pMinute = minute;
                     date = pad(pHour) + ":" + pad(pMinute);
-                    displayToast();
+                    displayToast(isStartingTimeSelected);
                 }
             };
 
@@ -243,8 +245,14 @@ public class TimetableSlot extends AppCompatActivity {
         return null;
     }
 
-    private void displayToast() {
-        Toast.makeText(this, date,   Toast.LENGTH_SHORT).show();
+    private void displayToast(boolean select) {
+
+        if(select) {
+            isStartingTimeSelected = false;
+            lectureStartingTime.setText(date);
+        } else {
+            endingTime.setText(date);
+        }
 
     }
 

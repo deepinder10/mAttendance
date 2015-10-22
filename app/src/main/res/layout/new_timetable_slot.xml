@@ -84,8 +84,8 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/lecturestartingTime"
-                android:hint="Starting Time"
+                android:id="@+id/startingTime"
+                android:hint="Double Click to enter Starting Time"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -100,8 +100,8 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/lectureEndingTime"
-                android:hint="Ending Time"
+                android:id="@+id/endingTime"
+                android:hint="Double Click to enter Ending Time"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

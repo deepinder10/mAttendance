@@ -100,6 +100,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return expenseList;
     }
 
+    public ArrayList<String> showLectureList() {
+
+        ArrayList<String> expenseList = new ArrayList();
+
+        String selectQuery = "SELECT  "+LECTURE_NAME+" FROM " + LECTURE_TABLE_NAME + " order by id desc";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                // Adding contact to list
+                expenseList.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return expenseList;
+    }
     public boolean isLectureListEmpty() {
         SQLiteDatabase db = this.getReadableDatabase();
         String count = "SELECT count(*) FROM " + LECTURE_TABLE_NAME;

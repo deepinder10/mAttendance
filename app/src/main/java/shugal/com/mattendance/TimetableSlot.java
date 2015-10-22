@@ -108,6 +108,7 @@ public class TimetableSlot extends AppCompatActivity {
             return;
         }
         DatabaseHelper db = new DatabaseHelper(this);
+        data.setLecture_number(Integer.parseInt(lectureNumber.getText().toString()));
         db.addTimetableSlot(data);
         db.close();
         startActivity(new Intent(this, DaysActivity.class));

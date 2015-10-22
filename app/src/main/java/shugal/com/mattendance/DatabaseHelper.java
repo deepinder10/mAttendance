@@ -87,7 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(ENDING_TIME, data.getEnding_time());
 
         db.insert(TIMETABLE, null, values);
-        Log.d("Error", "Added new timetable slot");
+        Log.d("Error", data.getId() + " " + data.getLecture_name() + " " +data.getLecture_number());
         db.close();
     }
 
@@ -127,7 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         TimetableData data = new TimetableData();
 
         String selectQuery = "SELECT * FROM " + TIMETABLE + " where " + LECTURE_DAY  +
-                " = " + "\"" + day + "\"";
+                " = " + "\"" + day + "\" order by " + KEY_ID + " asc";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -147,9 +147,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
-        for (TimetableData d : expenseList) {
-            Log.d("Error", d.getLecture_number() + ", " + d.getLecture_name());
-        }
+        /*for (TimetableData d : expenseList) {
+            Log.d("Error", d.getId() + ", " + d.getLecture_name() + " " + d.getLecture_number());
+        }*/
         db.close();
         return expenseList;
     }
@@ -161,7 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         TimetableData data = new TimetableData();
 
         String selectQuery = "SELECT * FROM " + TIMETABLE + " where " + LECTURE_DAY  +
-                " = " + "\"" + day + "\" order by " + KEY_ID + " asc";
+                " = " + "\"" + day + "\"";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

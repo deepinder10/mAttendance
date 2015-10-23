@@ -1,7 +1,9 @@
 package shugal.com.mattendance;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,6 @@ public class DaysActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private String pageTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,18 @@ public class DaysActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Heya", Toast.LENGTH_SHORT).show();
+                DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+                if (db.isLectureListEmpty()) {
+                    Snackbar.make(view, "Please start by adding some lectures ", Snackbar.LENGTH_LONG)
+                            .setAction("Add Lectures", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                }
+                            }).show();
+                } else {
+                    startActivity(new Intent(DaysActivity.this, TimetableSlot.class));
+                }
             }
         });
 
@@ -83,18 +94,6 @@ public class DaysActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            pageTitle = mFragmentTitleList.get(position);
-            if (position == 0)
-                Toast.makeText(getApplicationContext(), "Monday", Toast.LENGTH_LONG).show();
-            if (position == 1)
-                Toast.makeText(getApplicationContext(), "Tuesday", Toast.LENGTH_LONG).show();
-            if (position == 2)
-                Toast.makeText(getApplicationContext(), "Wednesday", Toast.LENGTH_LONG).show();
-            if (position == 3)
-                Toast.makeText(getApplicationContext(), "Thursday", Toast.LENGTH_LONG).show();
-            if (position == 4)
-                Toast.makeText(getApplicationContext(), "Friday", Toast.LENGTH_LONG).show();
-
             return mFragmentTitleList.get(position);
         }
 

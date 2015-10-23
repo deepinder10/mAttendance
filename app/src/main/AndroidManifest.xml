@@ -40,6 +40,11 @@
         <activity
             android:name=".Greetings"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".TimetableSlot"
+            android:parentActivityName=".DaysActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

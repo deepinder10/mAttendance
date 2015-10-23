@@ -24,20 +24,32 @@ import java.util.ArrayList;
  * Created by abhishek on 22/10/15.
  */
 public class TimetableSlot extends AppCompatActivity {
-    private String date="";
-    private TimetableData data = new TimetableData();
-
-    private boolean isStartingTimeSelected = false;
     static final int TIME_DIALOG_ID = 0;
+    Toolbar toolbar;
+    Spinner weekdaySpinner, lectureNameSpinner;
+    EditText lectureStartingTime, endingTime;
+    TextInputLayout startingTimeLayout, endingTimeLayout;
+    private String date = "";
+    private TimetableData data = new TimetableData();
+    private boolean isStartingTimeSelected = false;
     private int pHour;
     private int pMinute;
-    Toolbar toolbar;
+    private TimePickerDialog.OnTimeSetListener mTimeSetListener =
+            new TimePickerDialog.OnTimeSetListener() {
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    pHour = hourOfDay;
+                    pMinute = minute;
+                    date = pad(pHour) + ":" + pad(pMinute);
+                    displayToast(isStartingTimeSelected);
+                }
+            };
 
-    Spinner weekdaySpinner, lectureNameSpinner;
-
-    EditText lectureStartingTime, endingTime;
-
-    TextInputLayout startingTimeLayout, endingTimeLayout;
+    private static String pad(int c) {
+        if (c >= 10)
+            return String.valueOf(c);
+        else
+            return "0" + String.valueOf(c);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +131,7 @@ public class TimetableSlot extends AppCompatActivity {
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.weekday_array, android.R.layout.simple_spinner_item);
+                R.array.weekday_array, android.R.layout.simple_spinner_dropdown_item);
 
         weekdaySpinner.setAdapter(adapter);
         weekdaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -138,7 +150,7 @@ public class TimetableSlot extends AppCompatActivity {
         ArrayList<String> lectureList = db.showLectureList();
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, lectureList);
+                android.R.layout.simple_spinner_dropdown_item, lectureList);
 
         lectureNameSpinner.setAdapter(dataAdapter);
         lectureNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -154,32 +166,6 @@ public class TimetableSlot extends AppCompatActivity {
             }
         });
         db.close();
-    }
-
-    private class MyTextWatcher implements TextWatcher {
-
-        private View view;
-
-        private MyTextWatcher(View view) {
-            this.view = view;
-        }
-
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        public void afterTextChanged(Editable editable) {
-            switch (view.getId()) {
-                case R.id.startingTime:
-                    validateStartingTime();
-                    break;
-                case R.id.endingTime:
-                    validateEndingTime();
-                    break;
-            }
-        }
     }
 
     private boolean validateEndingTime() {
@@ -206,22 +192,11 @@ public class TimetableSlot extends AppCompatActivity {
         return true;
     }
 
-
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
-
-    private TimePickerDialog.OnTimeSetListener mTimeSetListener =
-            new TimePickerDialog.OnTimeSetListener() {
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    pHour = hourOfDay;
-                    pMinute = minute;
-                    date = pad(pHour) + ":" + pad(pMinute);
-                    displayToast(isStartingTimeSelected);
-                }
-            };
 
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -246,10 +221,29 @@ public class TimetableSlot extends AppCompatActivity {
 
     }
 
-    private static String pad(int c) {
-        if (c >= 10)
-            return String.valueOf(c);
-        else
-            return "0" + String.valueOf(c);
+    private class MyTextWatcher implements TextWatcher {
+
+        private View view;
+
+        private MyTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()) {
+                case R.id.startingTime:
+                    validateStartingTime();
+                    break;
+                case R.id.endingTime:
+                    validateEndingTime();
+                    break;
+            }
+        }
     }
 }

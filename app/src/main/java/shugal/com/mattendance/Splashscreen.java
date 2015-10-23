@@ -54,12 +54,12 @@ public class Splashscreen extends Activity {
     private void createTablesAndDatabases() {
         DatabaseHelper db = new DatabaseHelper(this);
 
-
+        TimetableData td = new TimetableData("k", "k", "k", "l");
         LectureData d1 = new LectureData("Test", 0, 0);
         db.addLecture(d1);
 
         db.deleteFirstLecture();
-
+        db.deleteFirstTimeTable();
 
         db.close();
     }

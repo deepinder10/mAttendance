@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Created by abhishek on 21/10/15.
  */
+
 public class LectureCustomList extends ArrayAdapter<LectureData> {
 
     public LectureCustomList(Context context, List<LectureData> objects) {
@@ -45,7 +46,7 @@ public class LectureCustomList extends ArrayAdapter<LectureData> {
         lectureName.setText(data.get_lecture_name());
         lectureAbsents.setText("Absents: "+data.get_absents());
         lecturePresents.setText("Presents: " + data.get_presents());
-        lecturePercent.setText(percent+" %");
+        lecturePercent.setText(percent + " %");
 
         return convertView;
 

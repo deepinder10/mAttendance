@@ -63,7 +63,7 @@ public class Monday extends Fragment {
             emptyList.setVisibility(View.GONE);
             timetableList.setVisibility(View.VISIBLE);
             ArrayList<TimetableData> contacts = db.showTimetable(DAY);
-            db.showAllTimetable(DAY);
+            //db.showAllTimetable(DAY);
 
             TimetableCustomList adapter = new TimetableCustomList(getContext(), contacts);
             timetableList.setAdapter(adapter);

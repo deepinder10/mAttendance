@@ -35,9 +35,9 @@ public class TimetableSlot extends AppCompatActivity {
 
     Spinner weekdaySpinner, lectureNameSpinner;
 
-    EditText lectureNumber, lectureStartingTime, endingTime;
+    EditText lectureStartingTime, endingTime;
 
-    TextInputLayout lectureNumberLayout, startingTimeLayout, endingTimeLayout;
+    TextInputLayout startingTimeLayout, endingTimeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +51,13 @@ public class TimetableSlot extends AppCompatActivity {
 
         weekdaySpinner = (Spinner) findViewById(R.id.weekday);
         lectureNameSpinner = (Spinner) findViewById(R.id.lectureName);
-        lectureNumber = (EditText) findViewById(R.id.lectureNumber);
         lectureStartingTime = (EditText) findViewById(R.id.startingTime);
         endingTime = (EditText) findViewById(R.id.endingTime);
-        lectureNumberLayout = (TextInputLayout) findViewById(R.id.lectureNumberLayout);
-
         startingTimeLayout = (TextInputLayout) findViewById(R.id.startingTimeLayout);
         endingTimeLayout = (TextInputLayout) findViewById(R.id.endingTimeLayout);
 
 
-        lectureNumber.addTextChangedListener(new MyTextWatcher(lectureNumber));
+
         endingTime.addTextChangedListener(new MyTextWatcher(endingTime));
         lectureStartingTime.addTextChangedListener(new MyTextWatcher(lectureStartingTime));
 
@@ -96,9 +93,9 @@ public class TimetableSlot extends AppCompatActivity {
     }
 
     private void checkValidation() {
-        if (!validateLectureNumber()) {
+        /*if (!validateLectureNumber()) {
             return;
-        }
+        }*/
 
         if (!validateStartingTime()) {
             return;
@@ -108,7 +105,7 @@ public class TimetableSlot extends AppCompatActivity {
             return;
         }
         DatabaseHelper db = new DatabaseHelper(this);
-        data.setLecture_number(Integer.parseInt(lectureNumber.getText().toString()));
+        //data.setLecture_number(Integer.parseInt(lectureNumber.getText().toString()));
         db.addTimetableSlot(data);
         db.close();
         startActivity(new Intent(this, DaysActivity.class));
@@ -175,9 +172,6 @@ public class TimetableSlot extends AppCompatActivity {
 
         public void afterTextChanged(Editable editable) {
             switch (view.getId()) {
-                case R.id.lectureNumber:
-                    validateLectureNumber();
-                    break;
                 case R.id.startingTime:
                     validateStartingTime();
                     break;
@@ -212,17 +206,6 @@ public class TimetableSlot extends AppCompatActivity {
         return true;
     }
 
-    private boolean validateLectureNumber() {
-        if (lectureNumber.getText().toString().trim().isEmpty()) {
-            lectureNumberLayout.setError("Please Enter lecture number");
-            requestFocus(lectureNumber);
-            return false;
-        } else {
-            lectureNumberLayout.setErrorEnabled(false);
-        }
-
-        return true;
-    }
 
     private void requestFocus(View view) {
         if (view.requestFocus()) {

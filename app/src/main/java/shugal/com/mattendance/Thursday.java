@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Thursday extends Fragment {
@@ -58,9 +59,10 @@ public class Thursday extends Fragment {
         } else {
             emptyList.setVisibility(View.GONE);
             timetableList.setVisibility(View.VISIBLE);
-            List<LectureData> contacts = db.showAllLectures();
+            ArrayList<TimetableData> contacts = db.showTimetable(DAY);
+            //db.showAllTimetable(DAY);
 
-            LectureCustomList adapter = new LectureCustomList(getContext(), contacts);
+            TimetableCustomList adapter = new TimetableCustomList(getContext(), contacts);
             timetableList.setAdapter(adapter);
         }
 

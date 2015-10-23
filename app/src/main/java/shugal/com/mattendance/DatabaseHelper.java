@@ -56,7 +56,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 KEY_ID + " integer primary key autoincrement, " +
                 LECTURE_DAY + " string, " +
                 LECTURE_NAME + " string, " +
-                LECTURE_NUMBER + " integer, " +
                 STARTING_TIME + " string, " +
                 ENDING_TIME + " string);";
         db.execSQL(query);
@@ -82,12 +81,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(LECTURE_DAY, data.getDay());
         values.put(LECTURE_NAME, data.getLecture_name());
-        values.put(LECTURE_NUMBER, data.getLecture_number());
         values.put(STARTING_TIME, data.getStarting_time());
         values.put(ENDING_TIME, data.getEnding_time());
-
         db.insert(TIMETABLE, null, values);
-        Log.d("Error", data.getId() + " " + data.getLecture_name() + " " +data.getLecture_number());
+
+        Log.d("Error", data.getDay() + " " + data.getLecture_name() + " " + data.getStarting_time() + " " + data.getEnding_time());
         db.close();
     }
 
@@ -95,98 +93,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TIMETABLE, KEY_ID + " = ?",
                 new String[]{String.valueOf(1)});
-        Log.d("Error", "Deleted Lecture");
+        Log.d("Error", "Deleted Timetable");
         db.close();
     }
 
-    public void updateTimetableSlot(TimetableData data) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(LECTURE_DAY, data.getDay());
-        values.put(LECTURE_NAME, data.getLecture_name());
-        values.put(LECTURE_NUMBER, data.getLecture_number());
-        values.put(STARTING_TIME, data.getStarting_time());
-        values.put(ENDING_TIME, data.getEnding_time());
-
-        db.update(TIMETABLE, values, KEY_ID + " = ?",
-                new String[]{String.valueOf(data.getId())});
-    }
-
-    public void deleteTimetableSlot(TimetableData data) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TIMETABLE, KEY_ID + " = ?",
-                new String[]{String.valueOf(data.getId())});
-        Log.d("Error", "Deleted Lecture");
-        db.close();
-    }
 
     public ArrayList<TimetableData> showTimetable(String day) {
-
-        ArrayList<TimetableData> expenseList = new ArrayList();
-
-        TimetableData data = new TimetableData();
-
-        String selectQuery = "SELECT * FROM " + TIMETABLE + " where " + LECTURE_DAY  +
-                " = " + "\"" + day + "\" order by " + KEY_ID + " asc";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<TimetableData> tdata = new ArrayList<>();
+        String query = "Select * from " + TIMETABLE + " where " + LECTURE_DAY  + " =? order by id asc";
+        Cursor cursor = db.rawQuery(query, new String[] {day} );
         if (cursor.moveToFirst()) {
             do {
-                // Adding contact to list
+                TimetableData data = new TimetableData();
                 data.setId(Integer.parseInt(cursor.getString(0)));
                 data.setDay(cursor.getString(1));
                 data.setLecture_name(cursor.getString(2));
-                data.setLecture_number(Integer.parseInt(cursor.getString(3)));
-                data.setStarting_time(cursor.getString(4));
-                data.setEnding_time(cursor.getString(5));
-
-                expenseList.add(data);
+                data.setStarting_time(cursor.getString(3));
+                data.setEnding_time(cursor.getString(4));
+                tdata.add(data);
             } while (cursor.moveToNext());
         }
 
-        /*for (TimetableData d : expenseList) {
-            Log.d("Error", d.getId() + ", " + d.getLecture_name() + " " + d.getLecture_number());
-        }*/
         db.close();
-        return expenseList;
+        return tdata;
     }
 
-    public ArrayList<TimetableData> showAllTimetable(String day) {
 
-        ArrayList<TimetableData> expenseList = new ArrayList();
 
-        TimetableData data = new TimetableData();
 
-        String selectQuery = "SELECT * FROM " + TIMETABLE + " where " + LECTURE_DAY  +
-                " = " + "\"" + day + "\"";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                // Adding contact to list
-                data.setId(Integer.parseInt(cursor.getString(0)));
-                data.setDay(cursor.getString(1));
-                data.setLecture_name(cursor.getString(2));
-                data.setLecture_number(Integer.parseInt(cursor.getString(3)));
-                data.setStarting_time(cursor.getString(4));
-                data.setEnding_time(cursor.getString(5));
 
-                expenseList.add(data);
-            } while (cursor.moveToNext());
-        }
-
-        for (TimetableData d : expenseList) {
-            Log.d("Error", d.getLecture_number() + ", " + d.getLecture_name());
-        }
-        db.close();
-        return expenseList;
-    }
 
     public boolean isTimetableEmpty(String day) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -296,4 +234,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
+
 }

@@ -5,7 +5,6 @@ package shugal.com.mattendance;
  */
 public class TimetableData {
     private int id;
-    private int lecture_number;
     private String lecture_name;
     private String day;
     private String starting_time;
@@ -17,14 +16,6 @@ public class TimetableData {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getLecture_number() {
-        return lecture_number;
-    }
-
-    public void setLecture_number(int lecture_number) {
-        this.lecture_number = lecture_number;
     }
 
     public String getLecture_name() {
@@ -63,9 +54,8 @@ public class TimetableData {
 
     }
 
-    public TimetableData(int lecture_number, String lecture_name, String day,
+    public TimetableData(String lecture_name, String day,
                          String starting_time, String ending_time) {
-        this.lecture_number = lecture_number;
         this.lecture_name = lecture_name;
         this.day = day;
         this.starting_time = starting_time;

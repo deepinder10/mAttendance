@@ -35,8 +35,8 @@ public class TimetableCustomList extends ArrayAdapter<TimetableData> {
 
 
         lectureName.setText(data.getLecture_name());
-        lectureAbsents.setText("Starts at: "+data.getStarting_time());
-        lecturePresents.setText("Ends at: " + data.getEnding_time());
+        lectureAbsents.setText("Ends at: "+data.getEnding_time());
+        lecturePresents.setText("Starts at: " + data.getStarting_time());
 
         return convertView;
 

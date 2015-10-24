@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            MainActivity.this.finish();
-            super.onBackPressed();
+            finish();
+            //super.onBackPressed();
         }
     }
 

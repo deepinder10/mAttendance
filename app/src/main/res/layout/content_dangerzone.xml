@@ -12,11 +12,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="shugal.com.mattendance.TodayAttendance"
-    tools:showIn="@layout/activity_today_attendance">
+    tools:showIn="@layout/activity_dangerzone">
 
     <TextView
         android:id="@+id/mark"
-        android:text="Click and mark attendance"
+        android:text="Necessary Classes"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="You haven't added lectures yet"
+            android:text="Looks lke you're regular in classes ;)"
             android:textSize="50sp"
             android:textStyle="bold|italic" />
 

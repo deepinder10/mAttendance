@@ -34,10 +34,6 @@
         </activity>
 
         <activity
-            android:name=".NewLecture"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name=".Greetings"
             android:screenOrientation="portrait" />
 
@@ -53,19 +49,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"></activity>
 
-        <receiver android:name=".SampleAlarmReceiver" />
-
-        <receiver
-            android:name=".SampleBootReceiver"
-            android:enabled="false">
-
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-
-        </receiver>
-
-        <service android:name=".SampleSchedulingService" />
+        <activity
+            android:name=".Dangerzone"
+            android:label="@string/title_activity_today_attendance"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
 
     </application>
 

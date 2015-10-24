@@ -23,6 +23,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_today_attendance" />
+    <include layout="@layout/content_dangerzone" />
 
 </android.support.design.widget.CoordinatorLayout>

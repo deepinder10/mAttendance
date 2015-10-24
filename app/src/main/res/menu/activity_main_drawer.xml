@@ -12,7 +12,7 @@
                     android:title="Today's Attendance" />
                 <item
                     android:id="@+id/dangerZone"
-                    android:title="Danger Zone" />
+                    android:title="Shortages" />
             </menu>
         </item>
     </group>

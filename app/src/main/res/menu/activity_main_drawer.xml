@@ -6,13 +6,17 @@
             <menu>
                 <item
                     android:id="@+id/showTimetable"
-                    android:title="Show Timetable" />
+                    android:title="Show Timetable"
+                    android:icon="@drawable/tt"/>
                 <item
                     android:id="@+id/todayAttendance"
-                    android:title="Today's Attendance" />
+                    android:title="Today's Attendance"
+                    android:icon="@drawable/ta"
+                    />
                 <item
                     android:id="@+id/dangerZone"
-                    android:title="Shortages" />
+                    android:title="Shortages"
+                    android:icon="@drawable/danger"/>
             </menu>
         </item>
     </group>

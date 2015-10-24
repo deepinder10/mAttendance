@@ -12,9 +12,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -62,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements
         });
 
         lectureList = (ListView) findViewById(R.id.list_of_lectures);
+        registerForContextMenu(lectureList);
         printLectures();
 
     }
@@ -99,6 +103,35 @@ public class MainActivity extends AppCompatActivity implements
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.delete_lecture, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        DatabaseHelper db = new DatabaseHelper (this);
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        LectureData data = (LectureData) lectureList.getItemAtPosition(info.position);
+
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+                db.deleteLecture(data);
+                printLectures();
+                Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                db.close();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
 

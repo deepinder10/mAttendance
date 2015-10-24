@@ -32,7 +32,6 @@ public class Monday extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        registerForContextMenu(timetableList);
     }
 
     @Override

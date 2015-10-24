@@ -320,9 +320,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteTimetable(TimetableData data) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(LECTURE_TABLE_NAME, KEY_ID + " = ?",
+        db.delete(TIMETABLE, KEY_ID + " = ?",
                 new String[]{String.valueOf(data.getId())});
         Log.d("Error", "Deleted Lecture");
+        db.close();
+    }
+
+    public void removeAll()
+    {
+        // db.delete(String tableName, String whereClause, String[] whereArgs);
+        // If whereClause is null, it will delete all rows.
+        SQLiteDatabase db = this.getWritableDatabase(); // helper is object extends SQLiteOpenHelper
+        db.delete(LECTURE_TABLE_NAME, null, null);
+        db.delete(TIMETABLE, null, null);
         db.close();
     }
 }

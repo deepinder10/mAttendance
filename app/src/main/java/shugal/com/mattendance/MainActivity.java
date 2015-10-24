@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
 
         if (id == R.id.showTimetable) {
 
@@ -94,15 +96,60 @@ public class MainActivity extends AppCompatActivity implements
 
         } else if (id == R.id.todayAttendance) {
 
-            startActivity(new Intent(MainActivity.this, TodayAttendance.class));
+            if (db.isLectureListEmpty()) {
+                Snackbar.make(getCurrentFocus(), "Add some lectures first", Snackbar.LENGTH_LONG)
+                        .setAction("", null).show();
+                db.close();
+            } else {
+                startActivity(new Intent(MainActivity.this, TodayAttendance.class));
+            }
 
         } else if (id == R.id.dangerZone) {
 
-            startActivity(new Intent(MainActivity.this, Dangerzone.class));
+            if (db.isLectureListEmpty()) {
+                Snackbar.make(getCurrentFocus(), "Add some lectures first", Snackbar.LENGTH_LONG)
+                        .setAction("", null).show();
+                db.close();
+            } else {
+                startActivity(new Intent(MainActivity.this, Dangerzone.class));
+            }
+
+        }else if (id == R.id.reset) {
+            resetAll();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void resetAll() {
+
+        final Context context = this;
+
+        final AlertDialog.Builder customEventDialog = new AlertDialog.Builder(context);
+
+        customEventDialog.setTitle("Delete Everything ?");
+        customEventDialog.setCancelable(true);
+
+        customEventDialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+                db.removeAll();
+                printLectures();
+                db.close();
+                Snackbar.make(getCurrentFocus(), "Delete Successful", Snackbar.LENGTH_LONG)
+                        .setAction("", null).show();
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+
+        customEventDialog.create().show();
     }
 
 
@@ -177,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements
         customEventDialog.create().show();
     }
 
-    private void printLectures() {
+    public void printLectures() {
 
 
         DatabaseHelper db = new DatabaseHelper(this);
@@ -208,3 +255,5 @@ public class MainActivity extends AppCompatActivity implements
 
 
 }
+
+

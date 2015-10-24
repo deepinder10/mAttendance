@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="10"
-    android:background="#00BCD4"
+    android:background="#FFC107"
     android:orientation="vertical">
 
     <TextView
@@ -16,7 +16,7 @@
         android:gravity="center"
         android:paddingLeft="32dp"
         android:paddingRight="32dp"
-        android:text="Intro 2 title"
+        android:text="USER GUIDE"
         android:textColor="#ffffff"
         android:textSize="28sp" />
 
@@ -28,7 +28,7 @@
         android:gravity="center"
         android:paddingLeft="64dp"
         android:paddingRight="64dp"
-        android:text="Looooooooong description here"
+        android:text="Make your own timetable"
         android:textColor="#ffffff"
         android:textSize="16sp" />
 
@@ -45,7 +45,7 @@
             android:layout_gravity="center"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:src="@drawable/playstore_icon" />
+            android:src="@drawable/int2" />
     </LinearLayout>
 
     <TextView

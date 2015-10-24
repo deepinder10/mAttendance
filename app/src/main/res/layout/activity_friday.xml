@@ -21,7 +21,7 @@
 
         <TextView
             android:id="@+id/emptyListText"
-            android:text="You haven't added lectures yet"
+            android:text="No lectures to attend"
             android:layout_width="match_parent"
             android:gravity="center"
             android:textStyle="bold|italic"

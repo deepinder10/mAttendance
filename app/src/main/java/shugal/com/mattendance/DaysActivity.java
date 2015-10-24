@@ -72,6 +72,7 @@ public class DaysActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, MainActivity.class));
+
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -103,5 +104,7 @@ public class DaysActivity extends AppCompatActivity {
         }
 
     }
+
+
 }
 

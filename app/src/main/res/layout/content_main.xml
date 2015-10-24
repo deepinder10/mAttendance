@@ -25,14 +25,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/empty_event1" />
+            android:src="@drawable/empty" />
 
         <TextView
             android:id="@+id/emptyListText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="You haven't added lectures yet"
+            android:text="No lectures added yet"
             android:textSize="50sp"
             android:textStyle="bold|italic" />
 

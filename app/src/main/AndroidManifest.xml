@@ -37,6 +37,7 @@
 
         <activity
             android:name=".Greetings"
+            android:theme="@style/Splashscreen_theme"
             android:screenOrientation="portrait" />
 
         <activity

@@ -10,10 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +48,7 @@ public class TodayAttendance extends AppCompatActivity {
 
     }
 
-    private void startEditDialog(LectureData data) {
+    private void startEditDialog(final LectureData data) {
         final Context context = this;
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -59,25 +57,28 @@ public class TodayAttendance extends AppCompatActivity {
 
         final AlertDialog.Builder customEventDialog = new AlertDialog.Builder(context);
 
-        final RadioGroup radioGroup = (RadioGroup) dialogView.findViewById(R.id.radioGroup);
         final RadioButton presentBtn = (RadioButton) dialogView.findViewById(R.id.presentBtn);
         final RadioButton absentBtn = (RadioButton) dialogView.findViewById(R.id.absentBtn);
-        RadioButton noClass = (RadioButton) dialogView.findViewById(R.id.noClass);
 
         customEventDialog.setView(dialogView);
-        customEventDialog.setTitle("Mark Attendance");
+        customEventDialog.setTitle(data.get_lecture_name());
         customEventDialog.setCancelable(true);
         customEventDialog.setPositiveButton("Mark", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                DatabaseHelper db = new DatabaseHelper(context);
                 if (presentBtn.isChecked()) {
-                    Toast.makeText(getApplicationContext(), "PRESENT", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Present Marked", Toast.LENGTH_SHORT).show();
+                    db.updatePresents(data);
                 } else if (absentBtn.isChecked()) {
-                    Toast.makeText(getApplicationContext(), "Absent", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Absent Marked", Toast.LENGTH_SHORT).show();
+                    db.updateAbsents(data);
                 } else {
-                    Toast.makeText(getApplicationContext(), "No Class Marked", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "No Class for Today", Toast.LENGTH_SHORT).show();
                 }
+                db.close();
+                printLectures();
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override

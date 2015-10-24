@@ -174,6 +174,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void updateAbsents(LectureData data) {
+
+        data.set_absent(data.get_absents()+1);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(LECTURE_NAME, data.get_lecture_name());
+        values.put(KEY_PRESENTS, data.get_presents());
+        values.put(KEY_ABSENTS, data.get_absents());
+
+        // updating row
+        db.update(LECTURE_TABLE_NAME, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(data.get_id())});
+
+        db.close();
+    }
+
+    public void updatePresents(LectureData data) {
+
+        data.set_present(data.get_presents()+1);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(LECTURE_NAME, data.get_lecture_name());
+        values.put(KEY_PRESENTS, data.get_presents());
+        values.put(KEY_ABSENTS, data.get_absents());
+
+        // updating row
+        db.update(LECTURE_TABLE_NAME, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(data.get_id())});
+
+        db.close();
+    }
+
     public List<LectureData> showAllLectures() {
         List<LectureData> expenseList = new ArrayList<LectureData>();
 

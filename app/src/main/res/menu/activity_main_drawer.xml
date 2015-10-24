@@ -17,6 +17,10 @@
                     android:id="@+id/dangerZone"
                     android:title="Shortages"
                     android:icon="@drawable/danger"/>
+
+                <item
+                    android:id="@+id/reset"
+                    android:title="Reset" />
             </menu>
         </item>
     </group>

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.content.WakefulBroadcastReceiver;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -38,10 +39,11 @@ public class SampleAlarmReceiver extends WakefulBroadcastReceiver {
         calendar.setTimeInMillis(System.currentTimeMillis());
         // Set the alarm's trigger time to 9 p.m.
         calendar.set(Calendar.HOUR_OF_DAY, 21);
-        //calendar.set(Calendar.MINUTE, 4);
+        calendar.set(Calendar.MINUTE, 4);
 
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+        Log.d("time", "calendar  " + Calendar.HOUR_OF_DAY + "  " + calendar.getTimeInMillis());
+        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+
 
         // Enable {@code SampleBootReceiver} to automatically restart the alarm when the
         // device is rebooted.

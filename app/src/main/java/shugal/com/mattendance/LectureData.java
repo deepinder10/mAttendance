@@ -8,6 +8,7 @@ public class LectureData {
     private String lecture_name;
     private float presents;
     private float absents;
+    private float percent;
 
 
     public LectureData() {
@@ -19,6 +20,14 @@ public class LectureData {
         this.lecture_name = name;
         this.presents = presents;
         this.absents = absents;
+
+        float total = this.presents + this.absents;
+
+        if (total == 0) {
+            this.percent = 0;
+        } else {
+            this.percent = (this.presents/total)*100;
+        }
     }
 
     public String get_lecture_name() {
@@ -48,5 +57,28 @@ public class LectureData {
 
     public void set_present(float _present) {
         this.presents = _present;
+    }
+
+    public float getPercent() {
+        float total = this.presents + this.absents;
+
+        if (total == 0) {
+            this.percent = 0;
+        } else {
+            this.percent = (this.presents/total)*100;
+        }
+
+        return this.percent;
+    }
+
+    public void setPercent() {
+
+        float total = this.presents + this.absents;
+
+        if (total == 0) {
+            this.percent = 0;
+        } else {
+            this.percent = (this.presents/total)*100;
+        }
     }
 }

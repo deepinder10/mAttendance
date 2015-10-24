@@ -11,7 +11,18 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main">
+    tools:context="shugal.com.mattendance.TodayAttendance"
+    tools:showIn="@layout/activity_dangerzone">
+
+    <TextView
+        android:id="@+id/mark"
+        android:text="Necessary Classes"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="italic"
+        android:textSize="40dp" />
 
     <LinearLayout
         android:id="@+id/frame"
@@ -32,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="You haven't added lectures yet"
+            android:text="Looks lke you're regular in classes ;)"
             android:textSize="50sp"
             android:textStyle="bold|italic" />
 
@@ -43,7 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fastScrollAlwaysVisible="false"
-        android:divider="#000000"
         android:fastScrollEnabled="true"
         android:smoothScrollbar="true">
     </ListView>

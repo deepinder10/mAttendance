@@ -1,17 +1,23 @@
 package shugal.com.mattendance;
 
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -27,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
 
     ListView lectureList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // timeTable = (Button) findViewById(R.id.timetableButton);
 
-
+        notifications();
         // Navigation Drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -61,8 +67,52 @@ public class MainActivity extends AppCompatActivity implements
         });
 
         lectureList = (ListView) findViewById(R.id.list_of_lectures);
-
         printLectures();
+
+    }
+
+    private void notifications() {
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle("mAttendance")
+                        .setContentText("Lecture Alert");
+
+        Intent resultIntent = new Intent(this, TodayAttendance.class);
+
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        this,
+                        0,
+                        resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
+// Because clicking the notification opens a new ("special") activity, there's
+// no need to create an artificial back stack.
+        mBuilder.setAutoCancel(true);
+
+        mBuilder.setContentIntent(resultPendingIntent);
+
+        // Sets an ID for the notification
+        int mNotificationId = 001;
+// Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+// Builds the notification and issues it.
+
+        Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+
+        Log.d("Time ", "time is " + hour);
+
+        // if (hour == 21) {
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+        Vibrator v = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        v.vibrate(1000);
+
+
     }
 
     @Override
@@ -81,14 +131,37 @@ public class MainActivity extends AppCompatActivity implements
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        DatabaseHelper db = new DatabaseHelper(this);
+
         if (id == R.id.showTimetable) {
 
-            startActivity(new Intent(MainActivity.this, DaysActivity.class));
+            if (db.isLectureListEmpty()) {
+                Snackbar.make(getCurrentFocus(), "Please start by adding some lectures ", Snackbar.LENGTH_LONG)
+                        .setAction("Add Lectures", null).show();
+            } else {
+                db.close();
+                startActivity(new Intent(MainActivity.this, DaysActivity.class));
+            }
 
         } else if (id == R.id.todayAttendance) {
 
+            if (db.isLectureListEmpty()) {
+                Snackbar.make(getCurrentFocus(), "Please start by adding some lectures ", Snackbar.LENGTH_LONG)
+                        .setAction("Add Lectures", null).show();
+            } else {
+                db.close();
+                startActivity(new Intent(MainActivity.this, TodayAttendance.class));
+            }
+
         } else if (id == R.id.dangerZone) {
 
+            if (db.isLectureListEmpty()) {
+                Snackbar.make(getCurrentFocus(), "Please start by adding some lectures ", Snackbar.LENGTH_LONG)
+                        .setAction("Add Lectures", null).show();
+            } else {
+                db.close();
+                startActivity(new Intent(MainActivity.this, Dangerzone.class));
+            }
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

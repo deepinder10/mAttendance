@@ -30,10 +30,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LECTURE_NAME = "lecture_name";
     private static final String KEY_PRESENTS = "presents";
     private static final String KEY_ABSENTS = "absents";
+    private static final String KEY_PERCENT = "percent";
 
 
     // timetable table columns
-    private static final String LECTURE_NUMBER = "lecture_number";
     private static final String LECTURE_DAY = "day";
     private static final String STARTING_TIME = "starting_time";
     private static final String ENDING_TIME = "ending_time";
@@ -48,7 +48,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 KEY_ID + " integer primary key autoincrement, " +
                 LECTURE_NAME + " string, " +
                 KEY_PRESENTS + " real, " +
-                KEY_ABSENTS + " real);";
+                KEY_ABSENTS + " real, " +
+                KEY_PERCENT + " real);";
 
         db.execSQL(query);
 
@@ -97,7 +98,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-
     public ArrayList<TimetableData> showTimetable(String day) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<TimetableData> tdata = new ArrayList<>();
@@ -118,13 +118,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return tdata;
     }
-
-
-
-
-
-
-
 
     public boolean isTimetableEmpty(String day) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -167,10 +160,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(LECTURE_NAME, data.get_lecture_name());
         values.put(KEY_PRESENTS, data.get_presents());
         values.put(KEY_ABSENTS, data.get_absents());
+        data.setPercent();
+        values.put(KEY_PERCENT, data.getPercent());
 
 
         db.insert(LECTURE_TABLE_NAME, null, values);
         Log.d("Error", "Added new lecture");
+        db.close();
+    }
+
+    public void updateAbsents(LectureData data) {
+
+        data.set_absent(data.get_absents()+1);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(LECTURE_NAME, data.get_lecture_name());
+        values.put(KEY_PRESENTS, data.get_presents());
+        values.put(KEY_ABSENTS, data.get_absents());
+        data.setPercent();
+        values.put(KEY_PERCENT, data.getPercent());
+
+        // updating row
+        db.update(LECTURE_TABLE_NAME, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(data.get_id())});
+
+        db.close();
+    }
+
+    public void updatePresents(LectureData data) {
+
+        data.set_present(data.get_presents() + 1);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(LECTURE_NAME, data.get_lecture_name());
+        values.put(KEY_PRESENTS, data.get_presents());
+        values.put(KEY_ABSENTS, data.get_absents());
+
+        data.setPercent();
+        values.put(KEY_PERCENT, data.getPercent());
+
+        // updating row
+        db.update(LECTURE_TABLE_NAME, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(data.get_id())});
+
         db.close();
     }
 
@@ -218,9 +250,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return expenseList;
     }
 
+    public ArrayList<LectureData> showShortageLectures() {
+
+        ArrayList<LectureData> expenseList = new ArrayList<LectureData>();
+
+        String selectQuery = "SELECT * FROM " + LECTURE_TABLE_NAME + " where " + KEY_PERCENT +" < 75";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                // Adding contact to list
+                LectureData lectureData = new LectureData();
+                lectureData.set_id(Integer.parseInt(cursor.getString(0)));
+                lectureData.set_lecture_name(cursor.getString(1));
+                lectureData.set_present(Float.parseFloat(cursor.getString(2)));
+                lectureData.set_absent(Float.parseFloat(cursor.getString(3)));
+                lectureData.setPercent();
+                expenseList.add(lectureData);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return expenseList;
+    }
+
     public boolean isLectureListEmpty() {
         SQLiteDatabase db = this.getReadableDatabase();
         String count = "SELECT count(*) FROM " + LECTURE_TABLE_NAME;
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+
+        if (icount > 0) {
+            db.close();
+            return false;
+        } else {
+            db.close();
+            return true;
+        }
+
+    }
+
+    public boolean isDangerListEmpty() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String count = "SELECT count(*) FROM " + LECTURE_TABLE_NAME + " where " + KEY_PERCENT +" < 75";
         Cursor mcursor = db.rawQuery(count, null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);

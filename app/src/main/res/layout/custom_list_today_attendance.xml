@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ffffffff"
     android:paddingBottom="20dp"
+    android:background="#ffffffff"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="20dp">
@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/lectureName"
             android:layout_width="match_parent"
@@ -21,7 +22,8 @@
             android:layout_weight="1"
             android:text="Lecture Name"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/lecturePercent"
@@ -30,33 +32,11 @@
             android:layout_weight="1"
             android:text="Percentage: "
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:textColor="#000000" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/lecturePresents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Presents: "
-            android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/lectureAbsents"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="Absents: "
-            android:textStyle="italic" />
-
-    </LinearLayout>
 
 
 </LinearLayout>

@@ -10,6 +10,18 @@ public class TimetableData {
     private String starting_time;
     private String ending_time;
 
+    public TimetableData() {
+
+    }
+
+    public TimetableData(String lecture_name, String day,
+                         String starting_time, String ending_time) {
+        this.lecture_name = lecture_name;
+        this.day = day;
+        this.starting_time = starting_time;
+        this.ending_time = ending_time;
+    }
+
     public int getId() {
         return id;
     }
@@ -47,18 +59,6 @@ public class TimetableData {
     }
 
     public void setEnding_time(String ending_time) {
-        this.ending_time = ending_time;
-    }
-
-    public TimetableData() {
-
-    }
-
-    public TimetableData(String lecture_name, String day,
-                         String starting_time, String ending_time) {
-        this.lecture_name = lecture_name;
-        this.day = day;
-        this.starting_time = starting_time;
         this.ending_time = ending_time;
     }
 

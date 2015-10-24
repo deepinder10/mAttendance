@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
 
     ListView lectureList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements
 
         // timeTable = (Button) findViewById(R.id.timetableButton);
 
+        SampleAlarmReceiver alarm = new SampleAlarmReceiver();
+        alarm.setAlarm(this);
 
         // Navigation Drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -61,9 +62,10 @@ public class MainActivity extends AppCompatActivity implements
         });
 
         lectureList = (ListView) findViewById(R.id.list_of_lectures);
-
         printLectures();
+
     }
+
 
     @Override
     public void onBackPressed() {
@@ -86,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements
             startActivity(new Intent(MainActivity.this, DaysActivity.class));
 
         } else if (id == R.id.todayAttendance) {
+
+            startActivity(new Intent(MainActivity.this, TodayAttendance.class));
 
         } else if (id == R.id.dangerZone) {
 

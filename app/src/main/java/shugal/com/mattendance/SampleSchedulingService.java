@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 
+import java.util.Calendar;
+
 /**
  * Created by Deepinder on 10/24/2015.
  */
@@ -40,10 +42,18 @@ public class SampleSchedulingService extends IntentService {
                                 .bigText(msg))
                         .setContentText(msg);
 
+        Calendar c = Calendar.getInstance();
+        int d = c.get(Calendar.HOUR_OF_DAY);
+
+
         mBuilder.setContentIntent(contentIntent);
+        mBuilder.setAutoCancel(true);
+        if (d == 21) {
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         // Vibrate for 500 milliseconds
         v.vibrate(1000);
+        }
+
     }
 }

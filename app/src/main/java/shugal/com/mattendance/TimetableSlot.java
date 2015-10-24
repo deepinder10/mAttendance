@@ -121,6 +121,7 @@ public class TimetableSlot extends AppCompatActivity {
         db.addTimetableSlot(data);
         db.close();
         startActivity(new Intent(this, DaysActivity.class));
+        TimetableSlot.this.finish();
     }
 
     private void fillSpinners() {

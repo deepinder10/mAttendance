@@ -73,7 +73,8 @@ public class MainActivity extends AppCompatActivity implements
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            finish();
+            //super.onBackPressed();
         }
     }
 
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements
 
         } else if (id == R.id.dangerZone) {
 
+            startActivity(new Intent(MainActivity.this, Dangerzone.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

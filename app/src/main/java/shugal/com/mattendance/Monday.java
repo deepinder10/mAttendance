@@ -1,13 +1,19 @@
 package shugal.com.mattendance;
 
+import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -39,10 +45,38 @@ public class Monday extends Fragment {
             timetableList = (ListView) view.findViewById(R.id.timetable_list);
             emptyList = view.findViewById(R.id.frame);
 
+            registerForContextMenu(timetableList);
             printTimetable();
             return view;
         }
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.delete_lecture, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        DatabaseHelper db = new DatabaseHelper (getContext());
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        TimetableData data = (TimetableData) timetableList.getItemAtPosition(info.position);
+
+        switch (item.getItemId()) {
+            case R.id.action_delete:
+                db.deleteTimetable(data);
+                printTimetable();
+                Toast.makeText(getContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                db.close();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     private void printTimetable() {

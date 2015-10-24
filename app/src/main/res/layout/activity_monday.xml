@@ -33,6 +33,7 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:divider="#000000"
         android:fastScrollEnabled="true"
         android:fastScrollAlwaysVisible="false"
         android:smoothScrollbar="true">

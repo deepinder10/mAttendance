@@ -20,29 +20,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
             >
         </activity>
+
         <activity
             android:name=".DaysActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
+
         <activity
             android:name=".NewLecture"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".Greetings"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".TimetableSlot"
             android:parentActivityName=".DaysActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".TodayAttendance"
             android:label="@string/title_activity_today_attendance"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme"></activity>
     </application>
 

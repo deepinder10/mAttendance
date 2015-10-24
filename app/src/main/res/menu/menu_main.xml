@@ -4,7 +4,8 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/info"
+        android:icon="@drawable/abc"
         android:orderInCategory="100"
         android:title="Info"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>

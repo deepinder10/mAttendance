@@ -38,11 +38,12 @@ public class SampleAlarmReceiver extends WakefulBroadcastReceiver {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         // Set the alarm's trigger time to 9 p.m.
-        calendar.set(Calendar.HOUR_OF_DAY, 21);
-        calendar.set(Calendar.MINUTE, 4);
+        // calendar.set(Calendar.HOUR_OF_DAY, 21);
+        //  calendar.set(Calendar.MINUTE, 4);
 
         Log.d("time", "calendar  " + Calendar.HOUR_OF_DAY + "  " + calendar.getTimeInMillis());
-        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmIntent);
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(), 1000, alarmIntent);
 
 
         // Enable {@code SampleBootReceiver} to automatically restart the alarm when the

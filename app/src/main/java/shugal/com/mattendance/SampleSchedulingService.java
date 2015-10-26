@@ -19,7 +19,7 @@ import java.util.Locale;
  */
 public class SampleSchedulingService extends IntentService {
     public static final int NOTIFICATION_ID = 1;
-    NotificationCompat.Builder m5min;
+    NotificationCompat.Builder m5min, mDanger;
     private NotificationManager mNotificationManager;
     private int l, k;
     public SampleSchedulingService() {
@@ -47,6 +47,9 @@ public class SampleSchedulingService extends IntentService {
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, TodayAttendance.class), 0);
+
+        PendingIntent contentIntent2 = PendingIntent.getActivity(this, 0,
+                new Intent(this, Dangerzone.class), 0);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
@@ -96,7 +99,7 @@ public class SampleSchedulingService extends IntentService {
         mBuilder.setAutoCancel(true);
 
 
-        if (d == 21 && e == 1 && f == 10) {
+        if (d == 21 && e == 1 && f > 3) {
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         // Vibrate for 500 milliseconds
@@ -126,7 +129,7 @@ public class SampleSchedulingService extends IntentService {
                             .setSmallIcon(R.drawable.playstore_icon)
                             .setContentTitle("mAttendance")
                             .setStyle(new NotificationCompat.BigTextStyle()
-                                    .bigText(msg))
+                                    .bigText(name + " Class in 5 minutes"))
                             .setContentText(name + " Class in 5 minutes");
 
                     m5min.setAutoCancel(true);
@@ -138,6 +141,24 @@ public class SampleSchedulingService extends IntentService {
                     v.vibrate(1000);
                 }
             }
+        }
+
+        if (!db.isDangerListEmpty() && d == 8 && e == 55 && f < 3) {
+            mDanger = new NotificationCompat.Builder(this)
+                    .setSmallIcon(R.drawable.playstore_icon)
+                    .setContentTitle("mAttendance")
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText("You have Short of Attendance , Click here to check the Subjects"))
+                    .setContentText("You have Short of Attendance , Click here to check the Subjects");
+
+            mDanger.setAutoCancel(true);
+            mDanger.setContentIntent(contentIntent2);
+
+            mNotificationManager.notify(3, mDanger.build());
+            Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 500 milliseconds
+            v.vibrate(1000);
+
         }
 
 

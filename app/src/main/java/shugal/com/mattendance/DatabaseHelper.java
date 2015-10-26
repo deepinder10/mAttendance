@@ -37,6 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LECTURE_DAY = "day";
     private static final String STARTING_TIME = "starting_time";
     private static final String ENDING_TIME = "ending_time";
+    private static final String ROOM_NO = "room_no";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -58,7 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 LECTURE_DAY + " string, " +
                 LECTURE_NAME + " string, " +
                 STARTING_TIME + " string, " +
-                ENDING_TIME + " string);";
+                ENDING_TIME + " string, " +
+                ROOM_NO + " string);";
         db.execSQL(query);
 
         Log.d("Error", "Creating Table");
@@ -84,6 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(LECTURE_NAME, data.getLecture_name());
         values.put(STARTING_TIME, data.getStarting_time());
         values.put(ENDING_TIME, data.getEnding_time());
+        values.put(ROOM_NO, data.getRoom_no());
         db.insert(TIMETABLE, null, values);
 
         Log.d("Error", data.getDay() + " " + data.getLecture_name() + " " + data.getStarting_time() + " " + data.getEnding_time());
@@ -111,6 +114,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 data.setLecture_name(cursor.getString(2));
                 data.setStarting_time(cursor.getString(3));
                 data.setEnding_time(cursor.getString(4));
+                data.setRoom_no(cursor.getString(5));
                 tdata.add(data);
             } while (cursor.moveToNext());
         }
@@ -326,8 +330,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void removeAll()
-    {
+    public void removeAll() {
         // db.delete(String tableName, String whereClause, String[] whereArgs);
         // If whereClause is null, it will delete all rows.
         SQLiteDatabase db = this.getWritableDatabase(); // helper is object extends SQLiteOpenHelper

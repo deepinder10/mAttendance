@@ -22,6 +22,10 @@
                     android:id="@+id/reset"
                     android:title="Reset"
                     android:icon="@drawable/reset"/>
+                <item
+                    android:id="@+id/email"
+                    android:title="Share Attendance"
+                    android:icon="@drawable/share"/>
             </menu>
         </item>
     </group>

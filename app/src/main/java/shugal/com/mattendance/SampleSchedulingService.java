@@ -28,8 +28,14 @@ public class SampleSchedulingService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        String weekDay;
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
 
-        sendNotification("Mark Attendance");
+        Calendar calendar = Calendar.getInstance();
+        weekDay = dayFormat.format(calendar.getTime());
+
+        if (!weekDay.equals("Saturday") && !weekDay.equals("Sunday"))
+            sendNotification("Mark Attendance");
     }
 
     private void sendNotification(String msg) {
@@ -99,7 +105,7 @@ public class SampleSchedulingService extends IntentService {
         mBuilder.setAutoCancel(true);
 
 
-        if (d == 21 && e == 1 && f > 3) {
+        if (!db.isLectureListEmpty() && d == 21 && e == 1 && f < 3) {
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
         Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         // Vibrate for 500 milliseconds
@@ -115,8 +121,10 @@ public class SampleSchedulingService extends IntentService {
                 String name = data.getLecture_name();
                 String stHour = time.substring(0, 2);
                 String stMin = time.substring(3, 5);
+                String lecH = data.getRoom_no();
                 int sHour = Integer.parseInt(stHour);
                 int sMin = Integer.parseInt(stMin);
+
                 if (sMin >= 0 && sMin < 6) {
                     l = sHour - 1;
                     k = sMin - 5;
@@ -124,13 +132,14 @@ public class SampleSchedulingService extends IntentService {
                     l = sHour;
                     k = sMin - 5;
                 }
+
                 if (d == l && e == k && f < 4) {
                     m5min = new NotificationCompat.Builder(this)
                             .setSmallIcon(R.drawable.playstore_icon)
                             .setContentTitle("mAttendance")
                             .setStyle(new NotificationCompat.BigTextStyle()
-                                    .bigText(name + " Class in 5 minutes"))
-                            .setContentText(name + " Class in 5 minutes");
+                                    .bigText(name + " Class in 5 minutes in Room No. " + lecH))
+                            .setContentText(name + " Class in 5 minutes in Room No. " + lecH);
 
                     m5min.setAutoCancel(true);
                     m5min.setContentIntent(contentIntent);

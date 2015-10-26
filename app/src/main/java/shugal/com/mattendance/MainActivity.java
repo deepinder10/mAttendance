@@ -105,7 +105,11 @@ public class MainActivity extends AppCompatActivity implements
                 startActivity(new Intent(MainActivity.this, TodayAttendance.class));
             }
 
-        } else if (id == R.id.dangerZone) {
+        }
+        else if(id == R.id.email){
+            startActivity(new Intent(MainActivity.this, SendEmail.class));
+        }
+        else if (id == R.id.dangerZone) {
 
             if (db.isLectureListEmpty()) {
                 Snackbar.make(getCurrentFocus(), "Add some lectures first", Snackbar.LENGTH_LONG)

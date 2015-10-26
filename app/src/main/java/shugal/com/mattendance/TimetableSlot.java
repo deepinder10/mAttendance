@@ -27,13 +27,16 @@ public class TimetableSlot extends AppCompatActivity {
     static final int TIME_DIALOG_ID = 0;
     Toolbar toolbar;
     Spinner weekdaySpinner, lectureNameSpinner;
-    EditText lectureStartingTime, endingTime;
-    TextInputLayout startingTimeLayout, endingTimeLayout;
+    EditText lectureStartingTime, endingTime, lectureRoom;
+    TextInputLayout startingTimeLayout, endingTimeLayout, lectureRoomLayout
+            ;
     private String date = "";
+
     private TimetableData data = new TimetableData();
     private boolean isStartingTimeSelected = false;
     private int pHour;
     private int pMinute;
+
     private TimePickerDialog.OnTimeSetListener mTimeSetListener =
             new TimePickerDialog.OnTimeSetListener() {
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -65,11 +68,13 @@ public class TimetableSlot extends AppCompatActivity {
         lectureNameSpinner = (Spinner) findViewById(R.id.lectureName);
         lectureStartingTime = (EditText) findViewById(R.id.startingTime);
         endingTime = (EditText) findViewById(R.id.endingTime);
+        lectureRoom = (EditText) findViewById(R.id.classLocation);
         startingTimeLayout = (TextInputLayout) findViewById(R.id.startingTimeLayout);
         endingTimeLayout = (TextInputLayout) findViewById(R.id.endingTimeLayout);
+        lectureRoomLayout = (TextInputLayout) findViewById(R.id.lectureRoomLayout);
 
 
-
+        lectureRoom.addTextChangedListener(new MyTextWatcher(lectureRoom));
         endingTime.addTextChangedListener(new MyTextWatcher(endingTime));
         lectureStartingTime.addTextChangedListener(new MyTextWatcher(lectureStartingTime));
 
@@ -109,6 +114,10 @@ public class TimetableSlot extends AppCompatActivity {
             return;
         }*/
 
+        if (!validateLectureRoom()) {
+            return;
+        }
+
         if (!validateStartingTime()) {
             return;
         }
@@ -116,6 +125,9 @@ public class TimetableSlot extends AppCompatActivity {
         if (!validateEndingTime()) {
             return;
         }
+
+        data.setRoom_no(lectureRoom.getText().toString());
+
         DatabaseHelper db = new DatabaseHelper(this);
         //data.setLecture_number(Integer.parseInt(lectureNumber.getText().toString()));
         db.addTimetableSlot(data);
@@ -194,6 +206,18 @@ public class TimetableSlot extends AppCompatActivity {
         return true;
     }
 
+    private boolean validateLectureRoom() {
+        if (lectureRoom.getText().toString().trim().isEmpty()) {
+            lectureRoomLayout.setError("Please Enter Class Room Number");
+            requestFocus(lectureRoom);
+            return false;
+        } else {
+            lectureRoomLayout.setErrorEnabled(false);
+        }
+
+        return true;
+    }
+
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -245,6 +269,10 @@ public class TimetableSlot extends AppCompatActivity {
                 case R.id.endingTime:
                     validateEndingTime();
                     break;
+
+                case R.id.classLocation:
+                    validateLectureRoom();
+                            break;
             }
         }
     }

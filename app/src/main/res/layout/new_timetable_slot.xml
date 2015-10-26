@@ -55,6 +55,20 @@
             android:layout_height="match_parent" />
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/lectureRoomLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/classLocation"
+                android:hint="Enter Room Number"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/startingTimeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

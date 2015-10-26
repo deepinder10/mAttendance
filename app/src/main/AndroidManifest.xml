@@ -75,6 +75,12 @@
             android:name=".InfoActivity"
             android:label="@string/title_activity_info"
             android:theme="@style/AppTheme"></activity>
+
+        <activity
+            android:name=".DatewiseList"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

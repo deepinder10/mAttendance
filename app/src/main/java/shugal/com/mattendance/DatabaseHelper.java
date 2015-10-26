@@ -24,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String LECTURE_TABLE_NAME = "lectures";
     private static final String TIMETABLE = "timetable";
+    private static final String DATELIST = "datewise_data";
 
 
     //Lectures Table Columns
@@ -38,6 +39,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String STARTING_TIME = "starting_time";
     private static final String ENDING_TIME = "ending_time";
     private static final String ROOM_NO = "room_no";
+
+
+    private static final String DATE = "date";
+    //private static final String LECTURE_NAME = "lecture_name";
+    private static final String STATUS = "status";
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -63,6 +70,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ROOM_NO + " string);";
         db.execSQL(query);
 
+        query = "create table if not exists " + DATELIST+ "(" +
+                KEY_ID + " integer primary key autoincrement, " +
+                LECTURE_NAME + " string, " +
+                DATE + " string, " +
+                STATUS + " string);";
+
+        db.execSQL(query);
+
         Log.d("Error", "Creating Table");
         Log.d("Error", query);
     }
@@ -71,6 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists " + LECTURE_TABLE_NAME);
         db.execSQL("drop table if exists " + TIMETABLE);
+        db.execSQL("drop table if exists " + DATELIST);
         onCreate(db);
     }
 
@@ -336,6 +352,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase(); // helper is object extends SQLiteOpenHelper
         db.delete(LECTURE_TABLE_NAME, null, null);
         db.delete(TIMETABLE, null, null);
+//        db.delete(DATELIST, null, null);
         db.close();
+    }
+
+
+
+
+
+
+
+
+    // Datewise data
+    public void addDatewiseDatta(DatewiseData d) {
+
     }
 }

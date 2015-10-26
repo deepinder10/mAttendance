@@ -56,8 +56,10 @@ public class Splashscreen extends Activity {
 
         TimetableData td = new TimetableData("k", "k", "k", "l");
         LectureData d1 = new LectureData("Test", 0, 0);
+        DatewiseData d = new DatewiseData("k", "k", "k");
+        db.addDatewiseDatta(d);
         db.addLecture(d1);
-
+        db.addTimetableSlot(td);
         db.deleteFirstLecture();
         db.deleteFirstTimeTable();
 

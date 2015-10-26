@@ -6,5 +6,49 @@ package shugal.com.mattendance;
 public class DatewiseData {
     private int id;
     private String date;
+    private String subject;
     private String status;
+
+    public DatewiseData() {
+
+    }
+
+    public DatewiseData(String date, String subject, String status) {
+        this.date = date;
+        this.subject = subject;
+        this.status = status;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

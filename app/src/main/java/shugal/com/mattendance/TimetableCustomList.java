@@ -32,12 +32,13 @@ public class TimetableCustomList extends ArrayAdapter<TimetableData> {
         TextView lectureName = (TextView) convertView.findViewById(R.id.lectureName);
         TextView lectureAbsents = (TextView) convertView.findViewById(R.id.lectureAbsents);
         TextView lecturePresents = (TextView) convertView.findViewById(R.id.lecturePresents);
+        TextView lectureRoom = (TextView) convertView.findViewById(R.id.lectureRoom);
 
 
         lectureName.setText(data.getLecture_name());
         lectureAbsents.setText("Ends at: "+data.getEnding_time());
         lecturePresents.setText("Starts at: " + data.getStarting_time());
-
+        lectureRoom.setText("Lecture Room: " + data.getRoom_no());
         return convertView;
 
     }

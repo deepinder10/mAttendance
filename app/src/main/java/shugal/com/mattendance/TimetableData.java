@@ -9,6 +9,7 @@ public class TimetableData {
     private String day;
     private String starting_time;
     private String ending_time;
+    private String room_no;
 
     public TimetableData() {
 
@@ -63,4 +64,11 @@ public class TimetableData {
     }
 
 
+    public String getRoom_no() {
+        return this.room_no;
+    }
+
+    public void setRoom_no(String room_no) {
+        this.room_no = room_no;
+    }
 }

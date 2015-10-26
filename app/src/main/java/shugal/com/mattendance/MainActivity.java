@@ -271,6 +271,7 @@ public class MainActivity extends AppCompatActivity implements
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.info) {
+            startActivity(new Intent(MainActivity.this, InfoActivity.class));
             return true;
         }
 

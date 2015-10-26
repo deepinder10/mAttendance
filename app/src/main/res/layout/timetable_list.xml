@@ -24,6 +24,16 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Lecture Name" />
 
+        <TextView
+            android:id="@+id/lectureRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Room Number: "
+            android:inputType="number"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="italic" />
+
     </LinearLayout>
 
     <LinearLayout

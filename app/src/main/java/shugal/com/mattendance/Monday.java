@@ -1,9 +1,8 @@
 package shugal.com.mattendance;
 
-import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -83,7 +82,6 @@ public class Monday extends Fragment {
         DatabaseHelper db = new DatabaseHelper(getContext());
 
         //Gets date from this activity
-
 
         if (db.isTimetableEmpty(DAY)) {
             timetableList.setVisibility(View.GONE);

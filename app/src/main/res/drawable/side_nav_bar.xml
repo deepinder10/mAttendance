@@ -6,5 +6,6 @@
         android:centerColor="#1976D2"
         android:endColor="#0D47A1"
         android:startColor="#2196F3"
+
         android:type="linear" />
 </shape>

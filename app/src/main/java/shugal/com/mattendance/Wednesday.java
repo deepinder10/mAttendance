@@ -41,7 +41,7 @@ public class Wednesday extends Fragment {
             View view = inflater.inflate(R.layout.activity_wednesday, container, false);
             timetableList = (ListView) view.findViewById(R.id.timetable_list);
             emptyList = view.findViewById(R.id.frame);
-            
+
             printTimetable();
             return view;
         }

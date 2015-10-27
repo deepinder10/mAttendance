@@ -14,21 +14,37 @@
     android:weightSum="1"
     tools:showIn="@layout/email_toolbar">
 
-    <EditText
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/toLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="15dp"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/emailid"
-        android:hint="To:"/>
+        android:layout_height="wrap_content">
 
-    <EditText
+        <EditText
+            android:id="@+id/emailid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:hint="To:"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/subjectLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sub"
-        android:hint="Subject"
-        android:layout_gravity="center_horizontal" />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Subject"
+            android:layout_gravity="center_horizontal" />
+
+
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:text="Select Subject"
@@ -44,13 +60,21 @@
         android:text="Choose Subject"
         android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:id="@+id/msglist"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/msgFormatLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.65" />
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/msglist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.65" />
+
+    </android.support.design.widget.TextInputLayout>
+
 
 </LinearLayout>

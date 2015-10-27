@@ -41,9 +41,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String ROOM_NO = "room_no";
 
 
-    private static final String DATE = "date";
-    //private static final String LECTURE_NAME = "lecture_name";
-    private static final String STATUS = "status";
+    private static final String KEY_DATE = "date";
+    private static final String KEY_SUBJECT = "lecture_name";
+    private static final String KEY_STATUS = "status";
 
 
     public DatabaseHelper(Context context) {
@@ -72,9 +72,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         query = "create table if not exists " + DATELIST+ "(" +
                 KEY_ID + " integer primary key autoincrement, " +
-                LECTURE_NAME + " string, " +
-                DATE + " string, " +
-                STATUS + " string);";
+                KEY_SUBJECT + " string, " +
+                KEY_DATE + " string, " +
+                KEY_STATUS + " string);";
 
         db.execSQL(query);
 
@@ -199,7 +199,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void updateAbsents(LectureData data) {
 
-        data.set_absent(data.get_absents()+1);
+        data.set_absent(data.get_absents() + 1);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(LECTURE_NAME, data.get_lecture_name());
@@ -365,6 +365,70 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Datewise data
     public void addDatewiseDatta(DatewiseData d) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_SUBJECT, d.getSubject());
+        values.put(KEY_DATE, d.getDate());
+        values.put(KEY_STATUS, d.getStatus());
+
+
+        db.insert(DATELIST, null, values);
+        Log.d("Error", "Added new lecture");
+        db.close();
+    }
+
+    public void deleteFirstDate() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(DATELIST, KEY_ID + " = ?",
+                new String[]{String.valueOf(1)});
+        Log.d("Error", "Deleted Datewise data");
+        db.close();
+    }
+
+    public List<DatewiseData> showAllDatewiseData(String date) {
+        List<DatewiseData> expenseList = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM " + DATELIST + " where " + KEY_DATE + "=" + "\"" +date+"\" order by id desc";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                DatewiseData lectureData = new DatewiseData();
+                lectureData.setId(Integer.parseInt(cursor.getString(0)));
+                lectureData.setSubject(cursor.getString(1));
+                lectureData.setDate(cursor.getString(2));
+                lectureData.setStatus(cursor.getString(3));
+                // Adding contact to list
+                expenseList.add(lectureData);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+
+        for (DatewiseData data : expenseList) {
+            Log.d("DATEWISE DATA", data.getDate() + " " + data.getSubject());
+        }
+        return expenseList;
+    }
+
+    public boolean isDatelistEmpty(String date) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String count = "SELECT count(*) FROM " + DATELIST + " where " + KEY_DATE + "=" + "\"" +date+"\" order by id desc";;
+        Cursor mcursor = db.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+
+        if (icount > 0) {
+            db.close();
+            return false;
+        } else {
+            db.close();
+            return true;
+        }
 
     }
+
 }

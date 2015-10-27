@@ -13,6 +13,11 @@
                     android:title="Today's Attendance"
                     android:icon="@drawable/ta"
                     />
+
+                <item
+                    android:id="@+id/dateList"
+                    android:title="Datewise Attendance" />
+
                 <item
                     android:id="@+id/dangerZone"
                     android:title="Shortages"

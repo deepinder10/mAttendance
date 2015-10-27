@@ -62,6 +62,7 @@ public class Splashscreen extends Activity {
         db.addTimetableSlot(td);
         db.deleteFirstLecture();
         db.deleteFirstTimeTable();
+        db.deleteFirstDate();
 
         db.close();
     }

@@ -10,7 +10,7 @@
                     android:icon="@drawable/tt"/>
                 <item
                     android:id="@+id/todayAttendance"
-                    android:title="Today's Attendance"
+                    android:title="Mark Today's Attendance"
                     android:icon="@drawable/ta"
                     />
 

@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,36 +64,6 @@ public class SampleSchedulingService extends IntentService {
                                 .bigText(msg))
                         .setContentText(msg);
 
-     /*
-            for(int i =0; i<contacts.size();i++){
-                TimetableData data = contacts.get(i);
-                String time = data.getStarting_time();
-                String name = data.getLecture_name();
-                String stHour = time.substring(0, 2);
-                String stMin = time.substring(3, 5);
-                int sHour = Integer.parseInt(stHour);
-                int sMin = Integer.parseInt(stMin);
-                if (sMin >= 0 && sMin < 6 ){
-                    l =sHour - 1;
-                    k= sMin - 5;
-                }
-                else {
-                    l =sHour;
-                    k = sMin - 5;
-                }
-
-                Log.d("5min","5mim + " + l + "  " + k);
-                m5min =
-                        new NotificationCompat.Builder(this)
-                                .setSmallIcon(R.drawable.playstore_icon)
-                                .setContentTitle("mAttendance")
-                                .setStyle(new NotificationCompat.BigTextStyle()
-                                        .bigText(msg))
-                                .setContentText(name + " Class in 5 minutes");
-                m5min.setAutoCancel(true);
-                m5min.setContentIntent(contentIntent);
-            }
-*/
 
         Calendar c = Calendar.getInstance();
         int d = c.get(Calendar.HOUR_OF_DAY);
@@ -127,12 +96,11 @@ public class SampleSchedulingService extends IntentService {
 
                 if (sMin >= 0 && sMin < 6) {
                     l = sHour - 1;
-                    k = sMin - 5;
+                    k = 56;
                 } else {
                     l = sHour;
                     k = sMin - 5;
                 }
-
                 if (d == l && e == k && f < 4) {
                     m5min = new NotificationCompat.Builder(this)
                             .setSmallIcon(R.drawable.playstore_icon)
@@ -170,7 +138,5 @@ public class SampleSchedulingService extends IntentService {
 
         }
 
-
-        Log.d("exaxt time", "exact time " + d + " " + e);
     }
 }

@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.content.WakefulBroadcastReceiver;
-import android.util.Log;
 
 import java.util.Calendar;
 
@@ -41,7 +40,6 @@ public class SampleAlarmReceiver extends WakefulBroadcastReceiver {
         // calendar.set(Calendar.HOUR_OF_DAY, 21);
         //  calendar.set(Calendar.MINUTE, 4);
 
-        Log.d("time", "calendar  " + Calendar.HOUR_OF_DAY + "  " + calendar.getTimeInMillis());
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
                 calendar.getTimeInMillis(), 1000, alarmIntent);
 

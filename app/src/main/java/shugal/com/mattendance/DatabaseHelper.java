@@ -77,9 +77,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 KEY_STATUS + " string);";
 
         db.execSQL(query);
-
-        Log.d("Error", "Creating Table");
-        Log.d("Error", query);
     }
 
     @Override
@@ -113,7 +110,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TIMETABLE, KEY_ID + " = ?",
                 new String[]{String.valueOf(1)});
-        Log.d("Error", "Deleted Timetable");
         db.close();
     }
 
@@ -169,7 +165,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(LECTURE_TABLE_NAME, KEY_ID + " = ?",
                 new String[]{String.valueOf(1)});
-        Log.d("Error", "Deleted Lecture");
         db.close();
     }
 
@@ -177,7 +172,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(LECTURE_TABLE_NAME, KEY_ID + " = ?",
                 new String[]{String.valueOf(data.get_id())});
-        Log.d("Error", "Deleted Lecture");
         db.close();
     }
 
@@ -193,7 +187,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         db.insert(LECTURE_TABLE_NAME, null, values);
-        Log.d("Error", "Added new lecture");
         db.close();
     }
 
@@ -342,7 +335,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TIMETABLE, KEY_ID + " = ?",
                 new String[]{String.valueOf(data.getId())});
-        Log.d("Error", "Deleted Lecture");
         db.close();
     }
 
@@ -382,7 +374,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DATELIST, KEY_ID + " = ?",
                 new String[]{String.valueOf(1)});
-        Log.d("Error", "Deleted Datewise data");
         db.close();
     }
 

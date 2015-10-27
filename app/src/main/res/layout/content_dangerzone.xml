@@ -54,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fastScrollAlwaysVisible="false"
+        android:divider="#000000"
         android:fastScrollEnabled="true"
         android:smoothScrollbar="true">
     </ListView>

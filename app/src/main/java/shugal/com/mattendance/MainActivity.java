@@ -105,11 +105,15 @@ public class MainActivity extends AppCompatActivity implements
                 startActivity(new Intent(MainActivity.this, TodayAttendance.class));
             }
 
-        }
-        else if(id == R.id.email){
-            startActivity(new Intent(MainActivity.this, SendEmail.class));
-        }
-        else if (id == R.id.dangerZone) {
+        } else if(id == R.id.email){
+            if (db.isLectureListEmpty()) {
+                Snackbar.make(getCurrentFocus(), "Add some lectures first", Snackbar.LENGTH_LONG)
+                        .setAction("", null).show();
+                db.close();
+            } else {
+                startActivity(new Intent(MainActivity.this, SendEmail.class));
+            }
+        }  else if (id == R.id.dangerZone) {
 
             if (db.isLectureListEmpty()) {
                 Snackbar.make(getCurrentFocus(), "Add some lectures first", Snackbar.LENGTH_LONG)
@@ -119,8 +123,16 @@ public class MainActivity extends AppCompatActivity implements
                 startActivity(new Intent(MainActivity.this, Dangerzone.class));
             }
 
-        }else if (id == R.id.reset) {
+        } else if (id == R.id.reset) {
             resetAll();
+        } else if (id == R.id.dateList) {
+            if (db.isLectureListEmpty()) {
+                Snackbar.make(getCurrentFocus(), "Add some lectures first", Snackbar.LENGTH_LONG)
+                        .setAction("", null).show();
+                db.close();
+            } else {
+                startActivity(new Intent(MainActivity.this, DatewiseList.class));
+            }
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

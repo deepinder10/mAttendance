@@ -59,8 +59,8 @@ public class Dangerzone extends AppCompatActivity {
             List<LectureData> contacts = db.showShortageLectures();
 
 
-            TodayAttendanceCustomListAdapter adapter =
-                    new TodayAttendanceCustomListAdapter(getApplicationContext(), contacts);
+            DangerListAdapter adapter =
+                    new DangerListAdapter(getApplicationContext(), contacts);
             lectureList.setAdapter(adapter);
         }
 

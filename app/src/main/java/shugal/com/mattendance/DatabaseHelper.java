@@ -352,7 +352,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase(); // helper is object extends SQLiteOpenHelper
         db.delete(LECTURE_TABLE_NAME, null, null);
         db.delete(TIMETABLE, null, null);
-//        db.delete(DATELIST, null, null);
+        db.delete(DATELIST, null, null);
         db.close();
     }
 
@@ -416,7 +416,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean isDatelistEmpty(String date) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String count = "SELECT count(*) FROM " + DATELIST + " where " + KEY_DATE + "=" + "\"" +date+"\" order by id desc";;
+        String count = "SELECT count(*) FROM " + DATELIST + " where " + KEY_DATE + "=" + "\"" +date+"\" order by id desc";
         Cursor mcursor = db.rawQuery(count, null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);
@@ -429,6 +429,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
 
+    }
+
+    public String attendanceTillDate(String subject) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String count = "SELECT * FROM " + DATELIST + " where " + KEY_SUBJECT + "=" + "\"" +subject+"\" order by id desc";
+        StringBuffer message = new StringBuffer();
+
+        Cursor cursor = db.rawQuery(count, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                DatewiseData lectureData = new DatewiseData();
+                lectureData.setId(Integer.parseInt(cursor.getString(0)));
+                lectureData.setSubject(cursor.getString(1));
+                lectureData.setDate(cursor.getString(2));
+                lectureData.setStatus(cursor.getString(3));
+                message.append("Date: " + lectureData.getDate() + ", Status: " + lectureData.getStatus()+ "\n");
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return message.toString();
     }
 
 }

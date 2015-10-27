@@ -102,7 +102,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(ROOM_NO, data.getRoom_no());
         db.insert(TIMETABLE, null, values);
 
-        Log.d("Error", data.getDay() + " " + data.getLecture_name() + " " + data.getStarting_time() + " " + data.getEnding_time());
         db.close();
     }
 
@@ -366,7 +365,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         db.insert(DATELIST, null, values);
-        Log.d("Error", "Added new lecture");
         db.close();
     }
 
@@ -398,10 +396,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         db.close();
-
-        for (DatewiseData data : expenseList) {
-            Log.d("DATEWISE DATA", data.getDate() + " " + data.getSubject());
-        }
         return expenseList;
     }
 

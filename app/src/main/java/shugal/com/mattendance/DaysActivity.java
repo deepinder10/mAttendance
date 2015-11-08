@@ -37,6 +37,25 @@ public class DaysActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+        /*tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                super.onTabSelected(tab);
+                viewPager.clearOnPageChangeListeners();
+                viewPager.addOnPageChangeListener(new CustomTabLayoutOnPageChangeListener(tabLayout, getApplicationContext()));
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });*/
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +75,9 @@ public class DaysActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //viewPager.clearOnPageChangeListeners();
+        //viewPager.addOnPageChangeListener(new CustomTabLayoutOnPageChangeListener(tabLayout, getApplicationContext()));
 
     }
 

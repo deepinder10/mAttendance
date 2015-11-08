@@ -13,14 +13,20 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +37,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
 
-    ListView lectureList;
+    RecyclerView lectureList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +72,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        lectureList = (ListView) findViewById(R.id.list_of_lectures);
-        registerForContextMenu(lectureList);
+        lectureList = (RecyclerView) findViewById(R.id.list_of_lectures);
         printLectures();
 
     }
@@ -169,36 +174,6 @@ public class MainActivity extends AppCompatActivity implements
         customEventDialog.create().show();
     }
 
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
-
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.delete_lecture, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        DatabaseHelper db = new DatabaseHelper (this);
-
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        LectureData data = (LectureData) lectureList.getItemAtPosition(info.position);
-
-        switch (item.getItemId()) {
-            case R.id.action_delete:
-                db.deleteLecture(data);
-                printLectures();
-                Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
-                db.close();
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-    }
-
-
     private void addNewLecture() {
         final Context context = this;
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -263,7 +238,10 @@ public class MainActivity extends AppCompatActivity implements
             lectureList.setVisibility(View.VISIBLE);
             List<LectureData> contacts = db.showAllLectures();
 
-            LectureCustomList adapter = new LectureCustomList(this, contacts);
+            RVAdapter adapter = new RVAdapter(contacts);
+
+            lectureList.setLayoutManager(new LinearLayoutManager(this));
+            lectureList.setAdapter(adapter);
             lectureList.setAdapter(adapter);
         }
 
@@ -292,6 +270,87 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
+
+        List<LectureData> persons;
+
+        public RVAdapter(List<LectureData> persons){
+            this.persons = persons;
+        }
+
+        @Override
+        public PersonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.lecture_list2, parent, false);
+            PersonViewHolder pvh = new PersonViewHolder(v);
+            return pvh;
+        }
+
+        @Override
+        public void onBindViewHolder(final PersonViewHolder holder, int position) {
+            final LectureData data = persons.get(position);
+            holder.lectureName.setText(data.get_lecture_name());
+            holder.lectureAbsents.setText("Absents: "+data.get_absents());
+            holder.lecturePresents.setText("Presents: " + data.get_presents());
+            holder.lecturePercent.setText(data.getPercent()+"%");
+            holder.cv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), data.get_lecture_name(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            holder.cv.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    final PopupMenu popup = new PopupMenu(v.getContext(), v);
+                    popup.getMenuInflater().inflate(R.menu.delete_lecture, popup.getMenu());
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            DatabaseHelper db = new DatabaseHelper (MainActivity.this);
+                            db.deleteLecture(data);
+                            printLectures();
+                            Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                            db.close();
+                            return true;
+                        }
+                    });
+                    popup.show();
+                    return true;
+                }
+
+
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return persons.size();
+        }
+
+        @Override
+        public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+            super.onAttachedToRecyclerView(recyclerView);
+        }
+
+        public class PersonViewHolder extends RecyclerView.ViewHolder {
+            CardView cv;
+            TextView lectureName;
+            TextView lectureAbsents;
+            TextView lecturePresents;
+            TextView lecturePercent;
+
+            PersonViewHolder(View itemView) {
+                super(itemView);
+                cv = (CardView) itemView.findViewById(R.id.cv);
+                lectureName = (TextView) itemView.findViewById(R.id.lectureName);
+                lectureAbsents = (TextView)itemView.findViewById(R.id.lectureAbsents);
+                lecturePresents = (TextView) itemView.findViewById(R.id.lecturePresents);
+                lecturePercent = (TextView) itemView.findViewById(R.id.lecturePercent);
+            }
+        }
+
     }
 
 }

@@ -1,4 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="#ffffffff"
     android:layout_height="match_parent">
@@ -28,15 +30,10 @@
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/timetable_list"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#000000"
-        android:fastScrollEnabled="true"
-        android:fastScrollAlwaysVisible="false"
-        android:smoothScrollbar="true">
-    </ListView>
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/timetable_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 </RelativeLayout>
